@@ -126,26 +126,27 @@ export default function transformer(
       json.attributes.width || 100
     }, height = ${
       json.attributes.height || 100
-    }, ...props}) => (\n  <Svg width={width} height={height} viewBox="${
+    }, color, ...props}) => (\n  <Svg width={width} height={height} viewBox="${
       json.attributes.viewBox || '0 0 100 100'
     }" {...props}>\n`
 
     // Traverse the parsed SVG JSON to convert elements into React Native Svg components
     const convertElement = (element: SvgElement) => {
       const { name, attributes } = element
+      const fillAttribute = ` fill={color}`
 
       switch (name) {
         case 'path':
           usedElements.add('Path')
-          componentString += `    <Path d="${attributes.d}" />\n`
+          componentString += `    <Path d="${attributes.d}"${fillAttribute} />\n`
           break
         case 'circle':
           usedElements.add('Circle')
-          componentString += `    <Circle cx="${attributes.cx}" cy="${attributes.cy}" r="${attributes.r}" />\n`
+          componentString += `    <Circle cx="${attributes.cx}" cy="${attributes.cy}" r="${attributes.r}"${fillAttribute} />\n`
           break
         case 'rect':
           usedElements.add('Rect')
-          componentString += `    <Rect x="${attributes.x}" y="${attributes.y}" width="${attributes.width}" height="${attributes.height}" />\n`
+          componentString += `    <Rect x="${attributes.x}" y="${attributes.y}" width="${attributes.width}" height="${attributes.height}"${fillAttribute} />\n`
           break
         case 'line':
           usedElements.add('Line')
@@ -155,19 +156,19 @@ export default function transformer(
             attributes.y2
           }" strokeWidth="${
             attributes['stroke-width'] || 1
-          }" />\n`
+          }"${fillAttribute} />\n`
           break
         case 'polygon':
           usedElements.add('Polygon')
-          componentString += `    <Polygon points="${attributes.points}" />\n`
+          componentString += `    <Polygon points="${attributes.points}"${fillAttribute} />\n`
           break
         case 'polyline':
           usedElements.add('Polyline')
-          componentString += `    <Polyline points="${attributes.points}" />\n`
+          componentString += `    <Polyline points="${attributes.points}"${fillAttribute} />\n`
           break
         case 'ellipse':
           usedElements.add('Ellipse')
-          componentString += `    <Ellipse cx="${attributes.cx}" cy="${attributes.cy}" rx="${attributes.rx}" ry="${attributes.ry}" />\n`
+          componentString += `    <Ellipse cx="${attributes.cx}" cy="${attributes.cy}" rx="${attributes.rx}" ry="${attributes.ry}"${fillAttribute} />\n`
           break
         case 'g': // Support for <g> (Group) elements
           usedElements.add('G')

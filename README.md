@@ -61,6 +61,8 @@ const App = () => (
 )
 ```
 
+The `fill` of the SVG's elements is determined by setting the `color` prop.
+
 ## Credit
 
 The original icons were [designed by ProPublica](https://github.com/propublica/stateface) and provided as an icon font. [coryetzkorn](https://github.com/coryetzkorn) converted them to the svgdefs format. Passing on his kudos to ProPublica for the original work—and my kudos for having this repo as a starting point for _this_ new package!
