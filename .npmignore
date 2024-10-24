@@ -1,0 +1,37 @@
+# Node modules
+node_modules
+
+# Source files that shouldn't be included in the package
+src
+SVG
+**/*.svg
+
+# Config and build-related files
+rollup.config.js
+tsconfig.json
+eslint.config.mjs
+state-svg-defs.svg
+
+# Development environment
+.vscode
+.prettierignore
+.prettierrc
+.eslintrc.js
+.eslintignore
+.stylelintrc
+
+# Temporary files
+.DS_Store
+Thumbs.db
+
+# Docs and code mod
+docs
+codemod
+
+# Tests and related files
+test
+tests
+*.test.*
+*.spec.*
+coverage
+jest.config.js
